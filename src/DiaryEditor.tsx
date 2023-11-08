@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { useState, useRef, ChangeEvent } from "react";
 
 const DiaryEditor = () => {
   const [diary, setDiary] = useState({
@@ -6,6 +6,8 @@ const DiaryEditor = () => {
     content: "",
     emotion: 1,
   });
+  const authorRef = useRef<HTMLInputElement>(null);
+  const contentRef = useRef<HTMLTextAreaElement>(null);
 
   const handleChangeDiary = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -22,7 +24,22 @@ const DiaryEditor = () => {
   };
 
   const handleSubmit = () => {
-    console.log(diary);
+    if (diary.author.length < 1) {
+      alert("작성자는 최소 1글자 이상 입력해주세요");
+      if (authorRef.current) {
+        authorRef.current.focus();
+      }
+      return;
+    }
+
+    if (diary.content.length < 5) {
+      alert("일기 본문은 최소 5글자 이상 입력해주세요");
+      if (contentRef.current) {
+        contentRef.current.focus();
+      }
+      return;
+    }
+
     alert("저장 완료");
   };
 
@@ -34,6 +51,7 @@ const DiaryEditor = () => {
           name="author"
           value={diary.author}
           onChange={handleChangeDiary}
+          ref={authorRef}
         />
       </div>
       <div>
@@ -41,6 +59,7 @@ const DiaryEditor = () => {
           name="content"
           value={diary.content}
           onChange={handleChangeDiary}
+          ref={contentRef}
         />
       </div>
       <div>
