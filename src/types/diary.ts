@@ -3,7 +3,7 @@ export interface DiaryList {
   author: string;
   content: string;
   emotion: number;
-  created_date: number;
+  createdDate: number;
 }
 
 export interface DiaryListProps {
