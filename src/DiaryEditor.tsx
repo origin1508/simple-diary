@@ -1,6 +1,7 @@
 import { useState, useRef, ChangeEvent } from "react";
+import { DiaryEditorProps } from "./types/diary";
 
-const DiaryEditor = () => {
+const DiaryEditor = ({ onCreate }: DiaryEditorProps) => {
   const [diary, setDiary] = useState({
     author: "",
     content: "",
@@ -39,8 +40,13 @@ const DiaryEditor = () => {
       }
       return;
     }
-
+    onCreate(diary.author, diary.content, diary.emotion);
     alert("저장 완료");
+    setDiary({
+      author: "",
+      content: "",
+      emotion: 1,
+    });
   };
 
   return (
