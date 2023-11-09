@@ -1,6 +1,6 @@
-import { DiaryList } from "./types/diary";
+import { Data } from "./types/diary";
 
-const DiaryItem = ({ author, content, emotion, createdDate }: DiaryList) => {
+const DiaryItem = ({ author, content, emotion, createdDate }: Data) => {
   return (
     <div className="DiaryItem">
       <div className="info">
