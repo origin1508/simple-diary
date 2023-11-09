@@ -1,4 +1,4 @@
-export interface DiaryList {
+export interface Data {
   id: number;
   author: string;
   content: string;
@@ -7,5 +7,15 @@ export interface DiaryList {
 }
 
 export interface DiaryListProps {
-  diaryList?: DiaryList[];
+  diaryList?: Data[];
+}
+
+export type OnCreate = (
+  author: string,
+  content: string,
+  emotion: number
+) => void;
+
+export interface DiaryEditorProps {
+  onCreate: OnCreate;
 }
