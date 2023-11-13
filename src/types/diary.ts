@@ -8,7 +8,7 @@ export interface Data {
 
 export interface DiaryListProps {
   diaryList?: Data[];
-  onDelete: OnDelete;
+  onRemove: OnRemove;
 }
 
 export type OnCreate = (
@@ -21,8 +21,8 @@ export interface DiaryEditorProps {
   onCreate: OnCreate;
 }
 
-export type OnDelete = (targetId: number) => void;
+export type OnRemove = (targetId: number) => void;
 
 export interface DiaryItemProps extends Data {
-  onDelete: OnDelete;
+  onRemove: OnRemove;
 }

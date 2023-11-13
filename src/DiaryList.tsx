@@ -1,7 +1,7 @@
 import DiaryItem from "./DiaryItem";
 import { DiaryListProps } from "./types/diary";
 
-const DiaryList = ({ diaryList, onDelete }: DiaryListProps) => {
+const DiaryList = ({ diaryList, onRemove }: DiaryListProps) => {
   if (!diaryList) return <div>작성한 일기가 없습니다.</div>;
   return (
     <div className="DiaryList">
@@ -11,7 +11,7 @@ const DiaryList = ({ diaryList, onDelete }: DiaryListProps) => {
       </div>
       <div>
         {diaryList.map((item) => {
-          return <DiaryItem key={item.id} {...item} onDelete={onDelete} />;
+          return <DiaryItem key={item.id} {...item} onRemove={onRemove} />;
         })}
       </div>
     </div>
