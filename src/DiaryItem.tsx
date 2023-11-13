@@ -6,7 +6,7 @@ const DiaryItem = ({
   content,
   emotion,
   createdDate,
-  onDelete,
+  onRemove,
 }: DiaryItemProps) => {
   return (
     <div className="DiaryItem">
@@ -19,7 +19,7 @@ const DiaryItem = ({
       </div>
       <div className="content">{content}</div>
       <div>
-        <button onClick={() => onDelete(id)}>삭제</button>
+        <button onClick={() => onRemove(id)}>삭제</button>
       </div>
     </div>
   );
