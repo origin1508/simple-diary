@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import DiaryEditor from "./DiaryEditor";
 import DiaryList from "./DiaryList";
 import "./App.css";
-import { Data, OnCreate, OnRemove } from "./types/diary";
+import { Data, OnCreate, OnRemove, OnEdit } from "./types/diary";
 
 function App() {
   const [data, setData] = useState<Data[]>([]);
@@ -26,7 +26,7 @@ function App() {
   };
 
   const onRemove: OnRemove = (targetId) => {
-    if (window.confirm(`${targetId}번째 일기를 정말 삭제하시겠습니까?`)) {
+    if (window.confirm(`${targetId + 1}번째 일기를 정말 삭제하시겠습니까?`)) {
       const newDiaryList = data.filter((item) => item.id !== targetId);
       setData(newDiaryList);
     }
@@ -34,10 +34,18 @@ function App() {
     return;
   };
 
+  const onEdit: OnEdit = (targetId, newContent) => {
+    setData((prev) => {
+      return prev.map((item) =>
+        item.id === targetId ? { ...item, content: newContent } : item
+      );
+    });
+  };
+
   return (
     <div>
       <DiaryEditor onCreate={onCreate} />
-      <DiaryList diaryList={data} onRemove={onRemove} />
+      <DiaryList diaryList={data} onEdit={onEdit} onRemove={onRemove} />
     </div>
   );
 }
