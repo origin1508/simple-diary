@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, memo } from "react";
 import { DiaryItemProps } from "./types/diary";
 
 const DiaryItem = ({
@@ -77,4 +77,4 @@ const DiaryItem = ({
   );
 };
 
-export default DiaryItem;
+export default memo(DiaryItem);

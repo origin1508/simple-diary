@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useEffect, useMemo, useCallback } from "react";
 import DiaryEditor from "./DiaryEditor";
 import DiaryList from "./DiaryList";
 import "./App.css";
@@ -36,7 +36,7 @@ function App() {
     getData();
   }, []);
 
-  const onCreate: OnCreate = (author, content, emotion) => {
+  const onCreate: OnCreate = useCallback((author, content, emotion) => {
     const createdDate = new Date().getTime();
 
     const newItem = {
@@ -51,24 +51,23 @@ function App() {
     setData((prev) => {
       return [newItem, ...prev];
     });
-  };
+  }, []);
 
-  const onRemove: OnRemove = (targetId) => {
+  const onRemove: OnRemove = useCallback((targetId) => {
     if (window.confirm(`${targetId + 1}번째 일기를 정말 삭제하시겠습니까?`)) {
-      const newDiaryList = data.filter((item) => item.id !== targetId);
-      setData(newDiaryList);
+      setData((prev) => prev.filter((item) => item.id !== targetId));
     }
 
     return;
-  };
+  }, []);
 
-  const onEdit: OnEdit = (targetId, newContent) => {
+  const onEdit: OnEdit = useCallback((targetId, newContent) => {
     setData((prev) => {
       return prev.map((item) =>
         item.id === targetId ? { ...item, content: newContent } : item
       );
     });
-  };
+  }, []);
 
   const getDiaryAnalysis = useMemo(() => {
     const goodCount = data.filter((item) => item.emotion >= 3).length;
